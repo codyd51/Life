@@ -11,6 +11,8 @@
 
 @interface ViewController () {
     LFGridView* _gridView;
+    BOOL _gameRunning;
+    NSTimer* _gameLoop;
 }
 @end
 
@@ -20,7 +22,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     CGFloat width = self.view.frame.size.width;
-    _gridView = [[LFGridView alloc] initWithFrame:CGRectMake(0, self.view.center.y / 4, width, width) gridLength:10];
+    _gridView = [[LFGridView alloc] initWithFrame:CGRectMake(0, self.view.center.y / 4, width, width) gridLength:20];
     [self.view addSubview:_gridView];
     
     UIButton* start = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -31,6 +33,19 @@
     [self.view addSubview:start];
 }
 -(void)startButtonPressed:(UIButton*)sender {
-    [_gridView tick];
+    if (!_gameRunning) {
+        [sender setTitle:@"Stop" forState:UIControlStateNormal];
+        _gridView.userInteractionEnabled = NO;
+        
+        _gameLoop = [NSTimer scheduledTimerWithTimeInterval:0.25 target:_gridView selector:@selector(tick) userInfo:nil repeats:YES];
+        _gameRunning = YES;
+    }
+    else {
+        [sender setTitle:@"Start" forState:UIControlStateNormal];
+        _gridView.userInteractionEnabled = YES;
+        
+        [_gameLoop invalidate];
+        _gameRunning = NO;
+    }
 }
 @end

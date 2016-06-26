@@ -15,6 +15,8 @@
 		F2C1D5501D1F5999005C4F3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C1D54E1D1F5999005C4F3C /* LaunchScreen.storyboard */; };
 		F2C1D55B1D1F599A005C4F3C /* LifeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C1D55A1D1F599A005C4F3C /* LifeTests.m */; };
 		F2C1D5661D1F599A005C4F3C /* LifeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C1D5651D1F599A005C4F3C /* LifeUITests.m */; };
+		F2C1D5751D1F59B7005C4F3C /* LFGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C1D5741D1F59B7005C4F3C /* LFGridCell.m */; };
+		F2C1D5781D1F5AC2005C4F3C /* LFGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C1D5771D1F5AC2005C4F3C /* LFGridView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,10 @@
 		F2C1D5611D1F599A005C4F3C /* LifeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C1D5651D1F599A005C4F3C /* LifeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LifeUITests.m; sourceTree = "<group>"; };
 		F2C1D5671D1F599A005C4F3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2C1D5731D1F59B7005C4F3C /* LFGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFGridCell.h; sourceTree = "<group>"; };
+		F2C1D5741D1F59B7005C4F3C /* LFGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFGridCell.m; sourceTree = "<group>"; };
+		F2C1D5761D1F5AC2005C4F3C /* LFGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFGridView.h; sourceTree = "<group>"; };
+		F2C1D5771D1F5AC2005C4F3C /* LFGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFGridView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,10 @@
 				F2C1D5441D1F5999005C4F3C /* AppDelegate.m */,
 				F2C1D5461D1F5999005C4F3C /* ViewController.h */,
 				F2C1D5471D1F5999005C4F3C /* ViewController.m */,
+				F2C1D5761D1F5AC2005C4F3C /* LFGridView.h */,
+				F2C1D5771D1F5AC2005C4F3C /* LFGridView.m */,
+				F2C1D5731D1F59B7005C4F3C /* LFGridCell.h */,
+				F2C1D5741D1F59B7005C4F3C /* LFGridCell.m */,
 				F2C1D5491D1F5999005C4F3C /* Main.storyboard */,
 				F2C1D54C1D1F5999005C4F3C /* Assets.xcassets */,
 				F2C1D54E1D1F5999005C4F3C /* LaunchScreen.storyboard */,
@@ -273,9 +283,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2C1D5781D1F5AC2005C4F3C /* LFGridView.m in Sources */,
 				F2C1D5481D1F5999005C4F3C /* ViewController.m in Sources */,
 				F2C1D5451D1F5999005C4F3C /* AppDelegate.m in Sources */,
 				F2C1D5421D1F5999005C4F3C /* main.m in Sources */,
+				F2C1D5751D1F59B7005C4F3C /* LFGridCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

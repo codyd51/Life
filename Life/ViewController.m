@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "LFGridView.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    CGFloat width = self.view.frame.size.width;
+    LFGridView* gridView = [[LFGridView alloc] initWithFrame:CGRectMake(0, 0, width, width) gridLength:20];
+    gridView.center = self.view.center;
+    [self.view addSubview:gridView];
 }
 
 - (void)didReceiveMemoryWarning {

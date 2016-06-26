@@ -9,25 +9,28 @@
 #import "ViewController.h"
 #import "LFGridView.h"
 
-@interface ViewController ()
-
+@interface ViewController () {
+    LFGridView* _gridView;
+}
 @end
 
 @implementation ViewController
-
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
     CGFloat width = self.view.frame.size.width;
-    LFGridView* gridView = [[LFGridView alloc] initWithFrame:CGRectMake(0, 0, width, width) gridLength:20];
-    gridView.center = self.view.center;
-    [self.view addSubview:gridView];
+    _gridView = [[LFGridView alloc] initWithFrame:CGRectMake(0, self.view.center.y / 4, width, width) gridLength:10];
+    [self.view addSubview:_gridView];
+    
+    UIButton* start = [UIButton buttonWithType:UIButtonTypeSystem];
+    [start setTitle:@"Start" forState:UIControlStateNormal];
+    start.frame = CGRectMake(0, 0, self.view.frame.size.width / 4, self.view.frame.size.width / 8);
+    start.center = CGPointMake(self.view.center.x, _gridView.frame.origin.y + _gridView.frame.size.height + start.frame.size.height);
+    [start addTarget:self action:@selector(startButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:start];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)startButtonPressed:(UIButton*)sender {
+    [_gridView tick];
 }
-
 @end

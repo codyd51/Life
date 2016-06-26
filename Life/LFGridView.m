@@ -42,7 +42,10 @@
     }
     return self;
 }
--(LFGridCell*)cellAtRow:(NSUInteger)row col:(NSUInteger)col {
+-(LFGridCell*)cellAtPoint:(CGPoint)point {
+    NSUInteger row = point.x;
+    NSUInteger col = point.y;
+    
     if (row > _gridLength || col > _gridLength) return nil;
     
     //NSUInteger index = (col * _gridLength) + row;
@@ -57,7 +60,7 @@
     //look at every cell and record whether it's filled or not
     for (int row = 0; row < _gridLength; row++) {
         for (int col = 0; col < _gridLength; col++) {
-            LFGridCell* cell = [self cellAtRow:row col:col];
+            LFGridCell* cell = [self cellAtPoint:CGPointMake(row, col)];
             ret[row][col] = [NSNumber numberWithBool:cell.filled];
         }
     }
@@ -68,10 +71,52 @@
     //look at every cell in state and update the corresponding cell accordingly
     for (int row = 0; row < _gridLength; row++) {
         for (int col = 0; col < _gridLength; col++) {
-            LFGridCell* cell = [self cellAtRow:row col:col];
+            LFGridCell* cell = [self cellAtPoint:CGPointMake(row, col)];
             cell.filled = ((NSNumber*)state[row][col]).boolValue;
         }
     }
+}
+-(NSUInteger)neighborsCount:(CGPoint)loc gameState:(NSArray<NSMutableArray<NSNumber*>*>*)state {
+    NSUInteger row = loc.x;
+    NSUInteger col = loc.y;
+    NSUInteger neighbors = 0;
+    
+    if (row > 0) {
+        //left
+        if (state[row - 1][col].boolValue) neighbors++;
+        
+        //upper left
+        if (col > 0) {
+            if (state[row - 1][col - 1].boolValue) neighbors++;
+        }
+        //lower left
+        if (col < _gridLength - 1) {
+            if (state[row - 1][col + 1].boolValue) neighbors++;
+        }
+    }
+    if (row < _gridLength - 1) {
+        //right
+        if (state[row + 1][col].boolValue) neighbors++;
+        
+        //upper right
+        if (col > 0) {
+            if (state[row + 1][col - 1].boolValue) neighbors++;
+        }
+        //lower right
+        if (col < _gridLength - 1) {
+            if (state[row + 1][col + 1].boolValue) neighbors++;
+        }
+    }
+    if (col > 0) {
+        //top
+        if (state[row][col - 1].boolValue) neighbors++;
+    }
+    if (col < _gridLength - 1) {
+        //bottom
+        if (state[row][col + 1].boolValue) neighbors++;
+    }
+    
+    return neighbors;
 }
 -(void)tick {
     NSArray<NSMutableArray<NSNumber*>*>* gameState = [self gameState];
@@ -80,13 +125,19 @@
     //for every cell that's on, also turn on every cell to the right
     for (int row = 0; row < _gridLength; row++) {
         for (int col = 0; col < _gridLength; col++) {
-            if (gameState[row][col].boolValue) {
-                if (row > 0) newState[row - 1][col] = @YES;
-                if (row < _gridLength - 1) newState[row + 1][col] = @YES;
-                
-                if (col > 0) newState[row][col - 1] = @YES;
-                if (col < _gridLength - 1) newState[row][col + 1] = @YES;
-            }
+            NSUInteger neighbors = [self neighborsCount:CGPointMake(row, col) gameState:gameState];
+            
+            //if a cell has less than 2 neighbors it dies (underpopulation)
+            if (neighbors < 2) newState[row][col] = @NO;
+            
+            //any cell with 2 or 3 neighbors is safe
+            if (neighbors >= 2 && neighbors <= 3 && newState[row][col].boolValue) newState[row][col] = @YES;
+            
+            //any cell with 3 neighbors lives (reproduction)
+            if (neighbors == 3) newState[row][col] = @YES;
+            
+            //if a cell has more than 3 neighbors it does (overpopulation)
+            if (neighbors > 3) newState[row][col] = @NO;
         }
     }
     

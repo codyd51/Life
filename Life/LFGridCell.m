@@ -29,10 +29,14 @@
 -(void)setFilled:(BOOL)filled {
     _filled = filled;
     if (filled) {
-        self.backgroundColor = [UIColor blackColor];
+        [UIView animateWithDuration:0.15 animations:^{
+            self.backgroundColor = [UIColor blackColor];
+        }];
     }
     else {
-        self.backgroundColor = [UIColor whiteColor];
+        [UIView animateWithDuration:0.15 animations:^{
+            self.backgroundColor = [UIColor whiteColor];
+        }];
     }
 }
 @end

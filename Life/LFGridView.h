@@ -10,6 +10,6 @@
 #import "LFGridCell.h"
 
 @interface LFGridView : UIView
-//@property (nonatomic, retain)
 -(instancetype)initWithFrame:(CGRect)frame gridLength:(NSUInteger)length;
+-(void)tick;
 @end
